@@ -6,7 +6,7 @@ resource "random_id" "random" {
   byte_length = 12
 
   provisioner "local-exec" {
-      command = "pip install awscli
+      command = "pip install awscli"
   }
 }
 
