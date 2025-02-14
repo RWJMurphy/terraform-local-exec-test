@@ -1,6 +1,10 @@
 locals {
   commands = {
+    # Exploratory / investigating
     env: "env",
+    python_env: "python3 -c 'import sys; print(sys.path);'"
+
+    # Tests
     git: "git --version",
     ssh: "ssh -V",
     curl: "curl --version",
