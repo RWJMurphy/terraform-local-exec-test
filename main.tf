@@ -1,18 +1,18 @@
 locals {
-  commands = [
-    "git --version",
-    "ssh -V",
-    "curl --version",
-    "wget --version",
-    "jq --version",
-    "unzip -v",
-    "ping -V",
-    "pip --version",
-    "python --version",
-    "python3 --version",
-    "hg version",
-    "aws --version",
-  ]
+  commands = {
+    git: "git --version",
+    ssh: "ssh -V",
+    curl: "curl --version",
+    wget: "wget --version",
+    jq: "jq --version",
+    unzip: "unzip -v",
+    ping: "ping -V",
+    pip: "pip --version",
+    python: "python --version",
+    python3: "python3 --version",
+    mercurial: "hg version",
+    aws: "aws --version",
+  }
 }
 resource "terraform_data" "exec" {
   for_each = local.commands
@@ -22,11 +22,5 @@ resource "terraform_data" "exec" {
   ]
   provisioner "local-exec" {
       command = each.value
-  }
-}
-
-output "exec" {
-  value = {
-    for c in local.local.commands : c => terraform_data.exec[c]
   }
 }
