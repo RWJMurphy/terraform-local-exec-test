@@ -1,15 +1,32 @@
-resource "random_id" "random" {
-  keepers = {
-    uuid = uuid()
-  }
+locals {
+  commands = [
+    "git --version",
+    "ssh -V",
+    "curl --version",
+    "wget --version",
+    "jq --version",
+    "unzip -v",
+    "ping -V",
+    "pip --version",
+    "python --version",
+    "python3 --version",
+    "hg version",
+    "aws --version",
+  ]
+}
+resource "terraform_data" "exec" {
+  for_each = local.commands
 
-  byte_length = 12
-
+  triggers_replace = [
+    uuid()
+  ]
   provisioner "local-exec" {
-      command = "pip install awscli"
+      command = each.value
   }
 }
 
-output "random" {
-  value = random_id.random.hex
+output "exec" {
+  value = {
+    for c in local.local.commands : c => terraform_data.exec[c]
+  }
 }
