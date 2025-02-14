@@ -1,5 +1,6 @@
 locals {
   commands = {
+    env: "env",
     git: "git --version",
     ssh: "ssh -V",
     curl: "curl --version",
