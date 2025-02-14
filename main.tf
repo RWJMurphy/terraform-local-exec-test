@@ -8,7 +8,6 @@ locals {
     unzip: "unzip -v",
     ping: "ping -V",
     pip: "pip --version",
-    python: "python --version",
     python3: "python3 --version",
     mercurial: "hg version",
     aws: "aws --version",
